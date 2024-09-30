@@ -27,8 +27,9 @@ public class Gun : MonoBehaviour
             // show raycast 
             Debug.DrawLine(muzzle.position, hit.point, Color.red);
             Debug.Log(hit.point);
-            // spawn bullet hole decal
-            GameObject bulletHole = Instantiate(BulletHoleDecal, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+            // spawn bullet hole decal 
+            // center of the decal should be on the hit point
+            GameObject bulletHole = Instantiate(BulletHoleDecal, hit.point - hit.normal * 0.01f, Quaternion.FromToRotation(Vector3.forward, hit.normal));
             Destroy(bulletHole, 10f);
             Recoil();
         }
