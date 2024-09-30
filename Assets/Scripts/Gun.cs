@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     private float fireRate = 0.1f; // Time between each shot
     private float nextFireTime = 0f; // Time until next shot is allowed
     private int shotCount = 0; // Counter for the number of shots fired
+    public GameObject BulletHoleDecal;
 
     void Start()
     {
@@ -26,6 +27,9 @@ public class Gun : MonoBehaviour
             // show raycast 
             Debug.DrawLine(muzzle.position, hit.point, Color.red);
             Debug.Log(hit.point);
+            // spawn bullet hole decal
+            GameObject bulletHole = Instantiate(BulletHoleDecal, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+            Destroy(bulletHole, 10f);
             Recoil();
         }
         // Reset shot count when appropriate, e.g., when not firing
